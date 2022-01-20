@@ -1,3 +1,4 @@
+using ASP0116.BLL.Cart;
 using ASP0116.BLL.Categories;
 using ASP0116.BLL.Products;
 using ASP0116.FakeDB.Repositories.Categories.Abstract;
@@ -34,6 +35,9 @@ namespace ASP0116
             services.AddTransient<IProductService, ProductService>();
             services.AddTransient<ICategoryRepository, CategoryRepository>();
             services.AddTransient<ICategoryService, CategoryService>();
+            services.AddTransient<ICartService, CartService>();
+            services.AddHttpContextAccessor();
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -53,6 +57,8 @@ namespace ASP0116
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseSession();
+
 
             app.UseAuthorization();
 

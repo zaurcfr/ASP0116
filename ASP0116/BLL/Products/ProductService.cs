@@ -2,6 +2,7 @@
 using ASP0116.Entities;
 using ASP0116.FakeDB.Repositories.Categories.Abstract;
 using ASP0116.FakeDB.Repositories.Products.Abstract;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,11 +23,13 @@ namespace ASP0116.BLL.Products
     {
         private readonly IProductRepository productRepository;
         private readonly ICategoryRepository categoryRepository;
+        private readonly IHttpContextAccessor httpContextAccessor;
 
-        public ProductService(IProductRepository productRepository, ICategoryRepository categoryRepository)
+        public ProductService(IProductRepository productRepository, ICategoryRepository categoryRepository, IHttpContextAccessor httpContextAccessor)
         {
             this.productRepository = productRepository;
             this.categoryRepository = categoryRepository;
+            this.httpContextAccessor = httpContextAccessor;
         }
 
         public int Add(AddProductRequest request)
